@@ -20,7 +20,6 @@ const SearchAndFilters = ({
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
       <div className="flex flex-col space-y-4">
-        {/* Barra de pesquisa */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
@@ -32,7 +31,6 @@ const SearchAndFilters = ({
           />
         </div>
 
-        {/* Filtros */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex items-center space-x-2">
             <Filter className="w-5 h-5 text-gray-600 dark:text-gray-400" />
@@ -40,7 +38,6 @@ const SearchAndFilters = ({
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 flex-1">
-            {/* Filtro por área */}
             <select
               value={selectedArea}
               onChange={(e) => onAreaChange(e.target.value)}
@@ -52,7 +49,6 @@ const SearchAndFilters = ({
               ))}
             </select>
 
-            {/* Filtro por cidade */}
             <select
               value={selectedCity}
               onChange={(e) => onCityChange(e.target.value)}
@@ -64,7 +60,6 @@ const SearchAndFilters = ({
               ))}
             </select>
 
-            {/* Filtro por tecnologia */}
             <select
               value={selectedTech}
               onChange={(e) => onTechChange(e.target.value)}
@@ -76,7 +71,6 @@ const SearchAndFilters = ({
               ))}
             </select>
 
-            {/* Botão para limpar filtros */}
             {hasActiveFilters && (
               <button
                 onClick={onClearFilters}
@@ -89,7 +83,6 @@ const SearchAndFilters = ({
           </div>
         </div>
 
-        {/* Indicadores de filtros ativos */}
         {hasActiveFilters && (
           <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-200 dark:border-gray-600">
             <span className="text-sm text-gray-600 dark:text-gray-400">Filtros ativos:</span>
