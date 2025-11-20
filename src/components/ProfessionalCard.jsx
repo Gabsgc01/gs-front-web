@@ -8,7 +8,6 @@ const ProfessionalCard = ({ professional, onClick }) => {
       onClick={() => onClick(professional)}
     >
       <div className="flex flex-col items-center space-y-4">
-        {/* Foto do perfil */}
         <div className="relative">
           <img
             src={professional.foto}
@@ -21,7 +20,6 @@ const ProfessionalCard = ({ professional, onClick }) => {
           <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white dark:border-gray-800"></div>
         </div>
 
-        {/* Informações básicas */}
         <div className="text-center">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
             {professional.nome}
@@ -45,7 +43,6 @@ const ProfessionalCard = ({ professional, onClick }) => {
           </p>
         </div>
 
-        {/* Skills principais */}
         <div className="w-full">
           <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
             Principais Skills
@@ -67,7 +64,6 @@ const ProfessionalCard = ({ professional, onClick }) => {
           </div>
         </div>
 
-        {/* Botão de ação */}
         <button className="w-full btn-primary text-sm py-2">
           Ver Perfil Completo
         </button>
