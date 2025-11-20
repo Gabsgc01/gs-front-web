@@ -28,20 +28,34 @@ Sistema de **gamificação corporativa** que transforma metas empresariais em mi
 
 ## ✨ Funcionalidades
 
+### 🔐 Sistema de Autenticação
+- **Registro de Empresa**: Criação de conta empresarial completa
+- **Login Corporativo**: Autenticação segura com email da empresa
+- **Gestão de Usuários**: Administradores podem adicionar membros da equipe
+- **Controle de Acesso**: Diferentes níveis de permissão (Admin/Usuário)
+- **Dados Persistentes**: Informações salvas localmente para demonstração
+
 ### 🎮 Sistema de Gamificação
-- **Missões Colaborativas**: Desafios baseados nas metas da empresa
-- **Sistema de XP**: Pontuação por completar missões
-- **Recompensas**: Prêmios definidos pela gestão
-- **Ranking de Equipes**: Competição saudável entre times
-- **Perfis de Funcionários**: Visualização de conquistas e progresso
+- **Missões Colaborativas**: 12 desafios pré-configurados baseados em bem-estar corporativo
+- **Sistema de XP**: Pontuação dinâmica por completar missões (50-250 XP)
+- **Níveis de Usuário**: Sistema progressivo de 1-5 níveis baseado em XP
+- **Ranking de Equipes**: Competição saudável com posicionamento visual
+- **Dashboard Pessoal**: Métricas individuais e progresso de missões
 
 ### 🔧 Funcionalidades Técnicas
-- **Autenticação Corporativa**: Login integrado com email da empresa
-- **Gestão de Missões**: Interface para administradores criarem desafios
-- **Dashboard Analytics**: Métricas de engajamento e participação
+- **Autenticação Completa**: Sistema de login/logout com validação
+- **Gestão de Estado**: Context API para autenticação e temas
+- **Armazenamento Local**: Dados persistidos no localStorage
+- **Design System**: Componentes reutilizáveis com Tailwind CSS
 - **Dark Mode**: Alternância entre modo claro e escuro
-- **Design Responsivo**: Funciona em todos os dispositivos
-- **Notificações**: Alertas sobre novas missões e conquistas
+- **Design Responsivo**: Interface adaptável a todos os dispositivos
+- **Validação de Formulários**: Feedback em tempo real para usuário
+
+### 👥 Gestão de Equipe
+- **Adicionar Membros**: Interface para administradores incluírem funcionários
+- **Senhas Temporárias**: Sistema de acesso inicial para novos usuários
+- **Perfis Dinâmicos**: Avatares automáticos baseados no nome
+- **Ranking Atualizado**: Posicionamento automático baseado em XP
 
 ## 🏗️ Estrutura do Projeto
 
@@ -89,8 +103,30 @@ src/
 
 4. **Acesse no navegador**
    ```
-   http://localhost:3000
+   http://localhost:3001
    ```
+
+## 🎯 Como Usar
+
+### Primeira Vez (Criar Empresa)
+1. Acesse a aplicação
+2. Clique em "Criar conta para empresa"
+3. Preencha os dados da empresa e do administrador
+4. Faça login e comece a usar o sistema
+
+### Login Demonstração
+- **Email**: admin@empresa.com
+- **Senha**: admin123
+
+### Funcionalidades do Admin
+- **Adicionar Membros**: Use o botão verde no header
+- **Visualizar Relatórios**: Acesso completo ao dashboard e ranking
+- **Gerenciar Missões**: Acompanhar progresso da equipe
+
+### Funcionalidades do Usuário
+- **Participar de Missões**: Explorar e se juntar a desafios
+- **Acompanhar Progresso**: Dashboard pessoal com XP e conquistas
+- **Competir no Ranking**: Ver posição na equipe
 
 ## 📱 Funcionalidades da Interface
 
