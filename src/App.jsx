@@ -14,7 +14,6 @@ function App() {
   const [selectedProfessional, setSelectedProfessional] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Extrair opções únicas para os filtros
   const areas = useMemo(() => {
     return [...new Set(professionalsData.map(p => p.area))].sort();
   }, []);
@@ -28,7 +27,6 @@ function App() {
     return [...new Set(allTechs)].sort();
   }, []);
 
-  // Filtrar profissionais
   const filteredProfessionals = useMemo(() => {
     return professionalsData.filter(professional => {
       const matchesSearch = searchTerm === '' || 
@@ -70,7 +68,6 @@ function App() {
         <Header />
 
         <main className="container mx-auto px-4 py-8">
-          {/* Busca e Filtros */}
           <SearchAndFilters
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
@@ -86,7 +83,6 @@ function App() {
             onClearFilters={handleClearFilters}
           />
 
-          {/* Contador de resultados */}
           <div className="mb-6">
             <p className="text-gray-600 dark:text-gray-400">
               Exibindo <span className="font-semibold text-primary-600 dark:text-primary-400">
@@ -95,7 +91,6 @@ function App() {
             </p>
           </div>
 
-          {/* Grid de Cards */}
           {filteredProfessionals.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredProfessionals.map(professional => (
@@ -128,7 +123,6 @@ function App() {
             </div>
           )}
 
-          {/* Modal */}
           <ProfessionalModal
             professional={selectedProfessional}
             isOpen={isModalOpen}
@@ -136,7 +130,6 @@ function App() {
           />
         </main>
 
-        {/* Footer */}
         <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-12">
           <div className="container mx-auto px-4 py-6">
             <div className="text-center text-gray-600 dark:text-gray-400 text-sm">
