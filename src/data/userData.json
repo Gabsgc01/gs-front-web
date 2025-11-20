@@ -1,0 +1,130 @@
+{
+  "currentUser": {
+    "id": 1,
+    "nome": "Ana Clara Silva",
+    "foto": "https://images.unsplash.com/photo-1494790108755-2616b25d583c?w=200&h=200&fit=crop&crop=face",
+    "cargo": "Engenheira de Software Sênior",
+    "equipe": "Desenvolvimento Frontend",
+    "departamento": "Tecnologia",
+    "email": "ana.silva@empresa.com"
+  },
+  "userStats": {
+    "totalXP": 450,
+    "completedMissions": 6,
+    "currentStreak": 3,
+    "ranking": 12,
+    "teamCollaborations": 8,
+    "level": 3
+  },
+  "userProgress": {
+    "1": {
+      "joined": true,
+      "completed": true,
+      "progress": 100,
+      "completedDate": "2024-11-15"
+    },
+    "2": {
+      "joined": true,
+      "completed": false,
+      "progress": 60,
+      "joinedDate": "2024-11-10"
+    },
+    "4": {
+      "joined": true,
+      "completed": true,
+      "progress": 100,
+      "completedDate": "2024-11-12"
+    },
+    "6": {
+      "joined": true,
+      "completed": false,
+      "progress": 30,
+      "joinedDate": "2024-11-16"
+    },
+    "8": {
+      "joined": true,
+      "completed": true,
+      "progress": 100,
+      "completedDate": "2024-11-18"
+    }
+  },
+  "recentMissions": [
+    {
+      "title": "Café Virtual da Equipe",
+      "xp": 50,
+      "date": "15 Nov",
+      "status": "completed"
+    },
+    {
+      "title": "Feedback 360",
+      "xp": 80,
+      "date": "18 Nov",
+      "status": "completed"
+    },
+    {
+      "title": "Mentoria Cruzada",
+      "xp": 100,
+      "date": "10 Nov",
+      "status": "in-progress"
+    },
+    {
+      "title": "Buddy System",
+      "xp": 75,
+      "date": "12 Nov",
+      "status": "completed"
+    },
+    {
+      "title": "Projeto de Bem-Estar",
+      "xp": 120,
+      "date": "16 Nov",
+      "status": "in-progress"
+    }
+  ],
+  "teamRanking": [
+    {
+      "id": 1,
+      "nome": "Carlos Eduardo Santos",
+      "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+      "cargo": "Product Manager",
+      "xp": 680,
+      "level": 4,
+      "position": 1
+    },
+    {
+      "id": 2,
+      "nome": "Marina Oliveira",
+      "foto": "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=200&h=200&fit=crop&crop=face",
+      "cargo": "UX Designer",
+      "xp": 620,
+      "level": 4,
+      "position": 2
+    },
+    {
+      "id": 3,
+      "nome": "Roberto Silva",
+      "foto": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
+      "cargo": "DevOps Engineer",
+      "xp": 580,
+      "level": 3,
+      "position": 3
+    },
+    {
+      "id": 4,
+      "nome": "Fernanda Costa",
+      "foto": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+      "cargo": "Data Scientist",
+      "xp": 510,
+      "level": 3,
+      "position": 4
+    },
+    {
+      "id": 5,
+      "nome": "Ana Clara Silva",
+      "foto": "https://images.unsplash.com/photo-1494790108755-2616b25d583c?w=200&h=200&fit=crop&crop=face",
+      "cargo": "Engenheira de Software Sênior",
+      "xp": 450,
+      "level": 3,
+      "position": 5
+    }
+  ]
+}

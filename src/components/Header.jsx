@@ -15,10 +15,10 @@ const Header = () => {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                GS Network
+                TeamQuest
               </h1>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                O Futuro do Trabalho
+                Gamificação Corporativa
               </p>
             </div>
           </div>

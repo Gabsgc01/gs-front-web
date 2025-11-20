@@ -1,6 +1,6 @@
-# GS Network - Rede Profissional do Futuro
+# TeamQuest - Sistema de Gamificação Corporativa
 
-Uma aplicação web interativa que simula uma rede profissional voltada ao futuro do trabalho, permitindo explorar perfis de profissionais com informações completas.
+Uma aplicação web inovadora que utiliza gamificação para reconectar funcionários em ambientes de trabalho híbrido e remoto, fortalecendo vínculos e promovendo bem-estar através de missões colaborativas e recompensas.
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -10,24 +10,38 @@ Uma aplicação web interativa que simula uma rede profissional voltada ao futur
 - **Lucide React** - Biblioteca de ícones
 - **JavaScript (ES6+)** - Linguagem de programação
 
+## 🎯 Problema e Solução
+
+### 🔍 Oportunidade Identificada
+Com o aumento dos modelos de trabalho remoto e híbrido, surgiram desafios relacionados à:
+- **Perda de vínculo** com a empresa e colegas
+- **Falta de motivação** e engajamento
+- **Dificuldades na comunicação** entre funcionários
+- **Problemas de bem-estar mental** devido ao isolamento
+
+### 💡 Nossa Solução: TeamQuest
+Sistema de **gamificação corporativa** que transforma metas empresariais em missões colaborativas, promovendo:
+- **Reconexão humana** através de desafios em grupo
+- **Engajamento** por meio de recompensas e XP
+- **Bem-estar mental** com interações mais saudáveis
+- **Produtividade** alinhada aos objetivos da empresa
+
 ## ✨ Funcionalidades
 
-### ✅ Implementadas
-- **Cards de Profissionais**: Exibição de informações básicas (nome, foto, cargo, skills)
-- **Modal Detalhado**: Visualização completa do perfil profissional
-- **Sistema de Busca**: Pesquisa por nome ou cargo
-- **Filtros Avançados**: Por área, cidade e tecnologia
-- **Dark Mode**: Alternância entre modo claro e escuro
-- **Design Responsivo**: Adaptado para diferentes tamanhos de tela
-- **Botões Funcionais**: "Recomendar profissional" e "Enviar mensagem"
+### 🎮 Sistema de Gamificação
+- **Missões Colaborativas**: Desafios baseados nas metas da empresa
+- **Sistema de XP**: Pontuação por completar missões
+- **Recompensas**: Prêmios definidos pela gestão
+- **Ranking de Equipes**: Competição saudável entre times
+- **Perfis de Funcionários**: Visualização de conquistas e progresso
 
-### 📊 Base de Dados
-- **15 perfis profissionais fictícios** com informações completas:
-  - Informações pessoais e acadêmicas
-  - Experiências profissionais
-  - Habilidades técnicas e soft skills
-  - Projetos e certificações
-  - Idiomas e áreas de interesse
+### 🔧 Funcionalidades Técnicas
+- **Autenticação Corporativa**: Login integrado com email da empresa
+- **Gestão de Missões**: Interface para administradores criarem desafios
+- **Dashboard Analytics**: Métricas de engajamento e participação
+- **Dark Mode**: Alternância entre modo claro e escuro
+- **Design Responsivo**: Funciona em todos os dispositivos
+- **Notificações**: Alertas sobre novas missões e conquistas
 
 ## 🏗️ Estrutura do Projeto
 
