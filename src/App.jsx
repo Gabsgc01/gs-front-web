@@ -1,19 +1,42 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Header from './components/Header';
+import AuthPage from './components/AuthPage';
 import MissionCard from './components/MissionCard';
 import UserDashboard from './components/UserDashboard';
 import TeamRanking from './components/TeamRanking';
-import { Target, Users, Award, Filter, Search } from 'lucide-react';
+import { Target, Users, Award, Filter, Search } from './utils/icons.js';
 import missionsData from './data/missions.json';
-import userData from './data/userData.json';
+import { initializeDemoData } from './utils/demoData.js';
 
-function App() {
+const MainApp = () => {
+  const { isAuthenticated, currentUser, currentCompany, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('missions');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedDifficulty, setSelectedDifficulty] = useState('');
-  const [userProgress, setUserProgress] = useState(userData.userProgress);
+  const [userProgress, setUserProgress] = useState({});
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    if (currentUser && currentCompany) {
+      // Carregar dados da empresa
+      const progress = JSON.parse(localStorage.getItem(`teamquest_progress_${currentCompany.id}`) || '{}');
+      const ranking = JSON.parse(localStorage.getItem(`teamquest_ranking_${currentCompany.id}`) || '[]');
+      
+      setUserProgress(progress);
+      setUserData({
+        currentUser,
+        userStats: currentUser.stats,
+        recentMissions: [
+          { title: "Café Virtual da Equipe", xp: 50, date: "15 Nov", status: "completed" },
+          { title: "Mentoria Cruzada", xp: 100, date: "10 Nov", status: "in-progress" }
+        ],
+        teamRanking: ranking
+      });
+    }
+  }, [currentUser, currentCompany]);
 
   const categories = useMemo(() => {
     return [...new Set(missionsData.map(m => m.categoria))].sort();
@@ -37,27 +60,49 @@ function App() {
   }, [searchTerm, selectedCategory, selectedDifficulty]);
 
   const handleJoinMission = (missionId) => {
-    setUserProgress(prev => ({
-      ...prev,
+    const newProgress = {
+      ...userProgress,
       [missionId]: {
         joined: true,
         completed: false,
         progress: 0,
         joinedDate: new Date().toISOString().split('T')[0]
       }
-    }));
+    };
+    setUserProgress(newProgress);
+    localStorage.setItem(`teamquest_progress_${currentCompany.id}`, JSON.stringify(newProgress));
   };
 
   const handleCompleteMission = (missionId) => {
-    setUserProgress(prev => ({
-      ...prev,
+    const mission = missionsData.find(m => m.id === missionId);
+    const newProgress = {
+      ...userProgress,
       [missionId]: {
-        ...prev[missionId],
+        ...userProgress[missionId],
         completed: true,
         progress: 100,
         completedDate: new Date().toISOString().split('T')[0]
       }
-    }));
+    };
+    setUserProgress(newProgress);
+    localStorage.setItem(`teamquest_progress_${currentCompany.id}`, JSON.stringify(newProgress));
+
+    // Atualizar XP do usuário
+    if (mission) {
+      const updatedStats = {
+        ...currentUser.stats,
+        totalXP: currentUser.stats.totalXP + mission.xp,
+        completedMissions: currentUser.stats.completedMissions + 1
+      };
+      
+      // Atualizar usuário no localStorage
+      const users = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
+      const userIndex = users.findIndex(u => u.id === currentUser.id);
+      if (userIndex !== -1) {
+        users[userIndex].stats = updatedStats;
+        localStorage.setItem('teamquest_users', JSON.stringify(users));
+      }
+    }
   };
 
   const handleClearFilters = () => {
@@ -66,10 +111,35 @@ function App() {
     setSelectedDifficulty('');
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <Users className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+          <p className="text-gray-600 dark:text-gray-400">Carregando TeamQuest...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <AuthPage />;
+  }
+
+  if (!userData) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <Users className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+          <p className="text-gray-600 dark:text-gray-400">Carregando dados...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-        <Header />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <Header />
 
         <main className="container mx-auto px-4 py-8">
           {/* Navigation Tabs */}
@@ -235,6 +305,19 @@ function App() {
           </div>
         </footer>
       </div>
+    );
+};
+
+function App() {
+  useEffect(() => {
+    initializeDemoData();
+  }, []);
+
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <MainApp />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

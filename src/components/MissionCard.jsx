@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Clock, Award, Users, CheckCircle } from 'lucide-react';
+import { Target, Clock, Award, Users, CheckCircle } from '../utils/icons.js';
 
 const MissionCard = ({ mission, onJoin, onComplete, userProgress }) => {
   const isCompleted = userProgress?.completed || false;

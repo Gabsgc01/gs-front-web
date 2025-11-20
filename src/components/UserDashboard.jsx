@@ -1,5 +1,5 @@
 import React from 'react';
-import { Award, Trophy, Star, TrendingUp, Users, Target } from 'lucide-react';
+import { Award, Trophy, Star, TrendingUp, Users, Target } from '../utils/icons.js';
 
 const UserDashboard = ({ user, stats, recentMissions }) => {
   const getXPLevel = (xp) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Trophy, Medal, Award, Crown } from 'lucide-react';
+import { Trophy, Medal, Award, Crown } from '../utils/icons.js';
 
 const TeamRanking = ({ rankings, currentUserId }) => {
   const getRankingIcon = (position) => {
