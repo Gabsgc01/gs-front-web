@@ -15,15 +15,12 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-        {/* Overlay */}
         <div
           className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75"
           onClick={onClose}
         ></div>
 
-        {/* Modal */}
         <div className="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
-          {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               Perfil Profissional
@@ -37,7 +34,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Coluna da esquerda - Informações básicas */}
             <div className="lg:col-span-1">
               <div className="text-center mb-6">
                 <img
@@ -69,7 +65,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                   {professional.resumo}
                 </p>
 
-                {/* Botões de ação */}
                 <div className="space-y-3">
                   <button
                     onClick={handleRecommend}
@@ -88,7 +83,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Soft Skills */}
               <div className="mb-6">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Heart className="w-4 h-4 mr-2" />
@@ -106,7 +100,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Idiomas */}
               <div className="mb-6">
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Languages className="w-4 h-4 mr-2" />
@@ -123,9 +116,7 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
               </div>
             </div>
 
-            {/* Coluna da direita - Informações detalhadas */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Habilidades Técnicas */}
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
                   Habilidades Técnicas
@@ -142,7 +133,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Experiências */}
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Briefcase className="w-4 h-4 mr-2" />
@@ -163,7 +153,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Formação */}
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <Award className="w-4 h-4 mr-2" />
@@ -181,7 +170,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Projetos */}
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
                   <ExternalLink className="w-4 h-4 mr-2" />
@@ -207,7 +195,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Certificações */}
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
                   Certificações
@@ -225,7 +212,6 @@ const ProfessionalModal = ({ professional, isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* Áreas de Interesse */}
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
                   Áreas de Interesse
