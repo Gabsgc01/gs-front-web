@@ -2,6 +2,16 @@
 
 Uma aplicação web inovadora que utiliza gamificação para reconectar funcionários em ambientes de trabalho híbrido e remoto, fortalecendo vínculos e promovendo bem-estar através de missões colaborativas e recompensas.
 
+# TeamQuest - Membros da equipe
+
+- **Gabriel Ciriaco RM: 563827**
+- **Bernardo Hanashiro RM: 565266**
+- **Marco Aurelio RM: 563827**
+
+## Link Repositório
+
+**https://github.com/Gabsgc01/gs-front-web**
+
 ## 🚀 Tecnologias Utilizadas
 
 - **React** - Biblioteca JavaScript para interfaces de usuário
@@ -170,11 +180,3 @@ src/
 - `npm run dev` - Inicia servidor de desenvolvimento
 - `npm run build` - Gera build de produção
 - `npm run preview` - Visualiza build de produção
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
-**Desenvolvido por Gabriel Santos** - Rede Profissional do Futuro 🚀

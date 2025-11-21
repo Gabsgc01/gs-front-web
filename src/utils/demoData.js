@@ -1,4 +1,3 @@
-// Dados de demonstração para o sistema de autenticação
 const demoUsers = [
   {
     id: "demo1",
@@ -34,14 +33,12 @@ const demoCompany = {
   }
 };
 
-// Inicializar dados demo se não existirem
 const initializeDemoData = () => {
   const existingUsers = localStorage.getItem('teamquest_users');
   if (!existingUsers) {
     localStorage.setItem('teamquest_users', JSON.stringify(demoUsers));
     localStorage.setItem('teamquest_company_demo_company', JSON.stringify(demoCompany));
     
-    // Progresso demo
     const demoProgress = {
       "1": { joined: true, completed: true, progress: 100, completedDate: "2024-11-15" },
       "2": { joined: true, completed: false, progress: 60, joinedDate: "2024-11-10" },
@@ -49,7 +46,6 @@ const initializeDemoData = () => {
     };
     localStorage.setItem('teamquest_progress_demo_company', JSON.stringify(demoProgress));
     
-    // Ranking demo
     const demoRanking = [
       {
         id: "demo1",

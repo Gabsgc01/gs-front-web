@@ -21,7 +21,13 @@ import {
   Building,
   UserPlus,
   X,
-  LogOut
+  LogOut,
+  Gamepad2,
+  Circle,
+  RotateCcw,
+  Check,
+  Zap,
+  Calendar
 } from 'lucide-react';
 
 export {
@@ -47,5 +53,11 @@ export {
   Building,
   UserPlus,
   X,
-  LogOut
+  LogOut,
+  Gamepad2,
+  Circle,
+  RotateCcw,
+  Check,
+  Zap,
+  Calendar
 };

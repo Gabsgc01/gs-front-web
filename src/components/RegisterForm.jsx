@@ -30,7 +30,6 @@ const RegisterForm = ({ onToggleMode }) => {
     setLoading(true);
     setError('');
 
-    // Validações
     if (!formData.nome || !formData.email || !formData.password || !formData.confirmPassword || !formData.cargo || !formData.nomeEmpresa) {
       setError('Todos os campos são obrigatórios');
       setLoading(false);

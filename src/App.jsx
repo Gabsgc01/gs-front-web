@@ -6,7 +6,9 @@ import AuthPage from './components/AuthPage';
 import MissionCard from './components/MissionCard';
 import UserDashboard from './components/UserDashboard';
 import TeamRanking from './components/TeamRanking';
-import { Target, Users, Award, Filter, Search } from './utils/icons.js';
+import CompanyTeamStats from './components/CompanyTeamStats';
+import GamesPage from './pages/GamesPage';
+import { Target, Users, Award, Filter, Search, Gamepad2 } from './utils/icons.js';
 import missionsData from './data/missions.json';
 import { initializeDemoData } from './utils/demoData.js';
 
@@ -21,9 +23,32 @@ const MainApp = () => {
 
   useEffect(() => {
     if (currentUser && currentCompany) {
-      // Carregar dados da empresa
+      loadCompanyData();
+    }
+  }, [currentUser, currentCompany]);
+
+  const loadCompanyData = () => {
+    try {
       const progress = JSON.parse(localStorage.getItem(`teamquest_progress_${currentCompany.id}`) || '{}');
-      const ranking = JSON.parse(localStorage.getItem(`teamquest_ranking_${currentCompany.id}`) || '[]');
+      
+      const allUsers = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
+      const companyUsers = allUsers.filter(user => user.companyId === currentCompany.id);
+      
+      const updatedRanking = companyUsers
+        .map((user, index) => ({
+          id: user.id,
+          nome: user.nome,
+          cargo: user.cargo,
+          foto: user.foto,
+          xp: user.stats.totalXP,
+          level: Math.floor(user.stats.totalXP / 1000) + 1,
+          completedMissions: user.stats.completedMissions,
+          position: 0
+        }))
+        .sort((a, b) => b.xp - a.xp)
+        .map((user, index) => ({ ...user, position: index + 1 }));
+      
+      localStorage.setItem(`teamquest_ranking_${currentCompany.id}`, JSON.stringify(updatedRanking));
       
       setUserProgress(progress);
       setUserData({
@@ -33,10 +58,12 @@ const MainApp = () => {
           { title: "Café Virtual da Equipe", xp: 50, date: "15 Nov", status: "completed" },
           { title: "Mentoria Cruzada", xp: 100, date: "10 Nov", status: "in-progress" }
         ],
-        teamRanking: ranking
+        teamRanking: updatedRanking
       });
+    } catch (error) {
+      console.error('Erro ao carregar dados da empresa:', error);
     }
-  }, [currentUser, currentCompany]);
+  };
 
   const categories = useMemo(() => {
     return [...new Set(missionsData.map(m => m.categoria))].sort();
@@ -95,12 +122,13 @@ const MainApp = () => {
         completedMissions: currentUser.stats.completedMissions + 1
       };
       
-      // Atualizar usuário no localStorage
       const users = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
       const userIndex = users.findIndex(u => u.id === currentUser.id);
       if (userIndex !== -1) {
         users[userIndex].stats = updatedStats;
         localStorage.setItem('teamquest_users', JSON.stringify(users));
+        
+        loadCompanyData();
       }
     }
   };
@@ -156,6 +184,17 @@ const MainApp = () => {
               <span>Missões</span>
             </button>
             <button
+              onClick={() => setActiveTab('games')}
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                activeTab === 'games'
+                  ? 'bg-purple-600 text-white shadow-md'
+                  : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+              }`}
+            >
+              <Gamepad2 className="w-4 h-4" />
+              <span>Jogos</span>
+            </button>
+            <button
               onClick={() => setActiveTab('dashboard')}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
                 activeTab === 'dashboard'
@@ -179,7 +218,6 @@ const MainApp = () => {
             </button>
           </div>
 
-          {/* Missions Tab */}
           {activeTab === 'missions' && (
             <>
               {/* Search and Filters */}
@@ -274,6 +312,9 @@ const MainApp = () => {
             </>
           )}
 
+          {/* Games Tab */}
+          {activeTab === 'games' && <GamesPage />}
+
           {/* Dashboard Tab */}
           {activeTab === 'dashboard' && (
             <div className="max-w-4xl mx-auto">
@@ -287,11 +328,18 @@ const MainApp = () => {
 
           {/* Ranking Tab */}
           {activeTab === 'ranking' && (
-            <div className="max-w-4xl mx-auto">
-              <TeamRanking
-                rankings={userData.teamRanking}
-                currentUserId={userData.currentUser.id}
-              />
+            <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2">
+                  <TeamRanking
+                    rankings={userData.teamRanking}
+                    currentUserId={userData.currentUser.id}
+                  />
+                </div>
+                <div>
+                  <CompanyTeamStats />
+                </div>
+              </div>
             </div>
           )}
         </main>

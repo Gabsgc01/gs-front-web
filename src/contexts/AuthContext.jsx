@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar se existe sessão salva
     const savedUser = localStorage.getItem('teamquest_user');
     const savedCompany = localStorage.getItem('teamquest_company');
     
@@ -31,7 +30,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      // Simular chamada API
       const users = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
       const user = users.find(u => u.email === email && u.password === password);
       
@@ -58,7 +56,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const { nome, email, password, cargo, nomeEmpresa } = userData;
       
-      // Verificar se usuário já existe
       const users = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
       if (users.find(u => u.email === email)) {
         throw new Error('Email já cadastrado');
@@ -89,10 +86,10 @@ export const AuthProvider = ({ children }) => {
         id: userId,
         nome,
         email,
-        password, // Em produção, usar hash
+        password,
         cargo,
         companyId,
-        isAdmin: true, // Primeiro usuário é admin
+        isAdmin: true,
         foto: `https://ui-avatars.com/api/?name=${encodeURIComponent(nome)}&size=200&background=6366f1&color=ffffff`,
         criadoEm: new Date().toISOString(),
         stats: {
@@ -150,7 +147,7 @@ export const AuthProvider = ({ children }) => {
         id: userId,
         nome,
         email,
-        password: 'temp123', // Senha temporária
+        password: 'temp123',
         cargo,
         companyId: currentCompany.id,
         isAdmin: false,
@@ -167,14 +164,74 @@ export const AuthProvider = ({ children }) => {
       users.push(newUser);
       localStorage.setItem('teamquest_users', JSON.stringify(users));
 
-      // Atualizar ranking da empresa
-      const ranking = JSON.parse(localStorage.getItem(`teamquest_ranking_${currentCompany.id}`) || '[]');
-      ranking.push(newUser);
-      localStorage.setItem(`teamquest_ranking_${currentCompany.id}`, JSON.stringify(ranking));
+      // Sincronizar ranking da empresa automaticamente
+      syncCompanyRanking(currentCompany.id);
 
       return { success: true, user: newUser };
     } catch (error) {
       return { success: false, error: error.message };
+    }
+  };
+
+  const updateUserXP = (userId, xpToAdd) => {
+    try {
+      // Atualizar usuários
+      const users = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
+      const userIndex = users.findIndex(u => u.id === userId);
+      
+      if (userIndex !== -1) {
+        const updatedStats = {
+          ...users[userIndex].stats,
+          totalXP: users[userIndex].stats.totalXP + xpToAdd
+        };
+        
+        const newLevel = Math.floor(updatedStats.totalXP / 1000) + 1;
+        updatedStats.level = newLevel;
+        
+        users[userIndex].stats = updatedStats;
+        localStorage.setItem('teamquest_users', JSON.stringify(users));
+
+        if (currentUser && currentUser.id === userId) {
+          const updatedUser = { ...currentUser, stats: updatedStats };
+          setCurrentUser(updatedUser);
+          localStorage.setItem('teamquest_user', JSON.stringify(updatedUser));
+        }
+
+        
+        syncCompanyRanking(users[userIndex].companyId);        return { success: true, newXP: updatedStats.totalXP, newLevel };
+      }
+      
+      return { success: false, error: 'Usuário não encontrado' };
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  };
+
+  const syncCompanyRanking = (companyId) => {
+    try {
+      const allUsers = JSON.parse(localStorage.getItem('teamquest_users') || '[]');
+      const companyUsers = allUsers.filter(user => user.companyId === companyId);
+      
+      const updatedRanking = companyUsers
+        .map(user => ({
+          id: user.id,
+          nome: user.nome,
+          cargo: user.cargo,
+          foto: user.foto,
+          xp: user.stats.totalXP,
+          level: Math.floor(user.stats.totalXP / 1000) + 1,
+          completedMissions: user.stats.completedMissions,
+          stats: user.stats
+        }))
+        .sort((a, b) => b.xp - a.xp)
+        .map((user, index) => ({ ...user, position: index + 1 }));
+      
+      localStorage.setItem(`teamquest_ranking_${companyId}`, JSON.stringify(updatedRanking));
+      
+      return updatedRanking;
+    } catch (error) {
+      console.error('Erro ao sincronizar ranking:', error);
+      return [];
     }
   };
 
@@ -186,7 +243,9 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
-    addTeamMember
+    addTeamMember,
+    updateUserXP,
+    syncCompanyRanking
   };
 
   return (
